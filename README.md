@@ -52,3 +52,14 @@ sudo apt-get update
 
 sudo apt-get install -y chainflip-cli chainflip-node chainflip-engine
 
+2、生成密钥
+
+a、创建存储密钥的目录
+
+sudo mkdir /etc/chainflip/keys
+
+b、导入以太坊密钥：YOUR_VALIDATOR_WALLET_PRIVATE_KEY替换成你的实际私钥【强烈建议使用新的钱包私钥！！！】
+
+echo -n "YOUR_VALIDATOR_WALLET_PRIVATE_KEY" |  sudo tee /etc/chainflip/keys/ethereum_key_file
+
+c、
