@@ -32,7 +32,7 @@
 
 a、添加Chainflip APT Repo
 
-sudo mkdir -p /etc/apt/keyrings
+$ sudo mkdir -p /etc/apt/keyrings
 
 curl -fsSL repo.chainflip.io/keys/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/chainflip.gpg
 
