@@ -92,4 +92,18 @@ sudo vim /etc/chainflip/config/Default.toml
 
 <img width="522" alt="确保你没有使用主网的RPC" src="https://user-images.githubusercontent.com/100336530/207265934-9caa50f4-f66c-4f85-b24b-ea82fc24b003.png">
 
+### 4、启动
 
+#### a、启动chainflip节点
+
+sudo systemctl start chainflip-node
+
+#### b、检查该服务，区块浏览器上找到最新的区块： https://blocks-perseverance.chainflip.io/
+
+sudo systemctl status chainflip-node
+
+#### c、查看实时日志
+
+tail -f /var/log/chainflip-node.log
+
+### 5、质押
