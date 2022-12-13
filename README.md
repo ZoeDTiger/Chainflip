@@ -25,3 +25,21 @@
  带宽：建议使用1GBps
  
  防火墙端口：30333（TCP）和8078（TCP）
+
+# 部署节点
+
+1、通过APT Repo下载二进制文件
+
+a、添加Chainflip APT Repo
+
+sudo mkdir -p /etc/apt/keyrings
+
+curl -fsSL repo.chainflip.io/keys/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/chainflip.gpg
+
+b、验证密钥的真实性：
+
+gpg --show-keys /etc/apt/keyrings/chainflip.gpg
+
+
+
+
