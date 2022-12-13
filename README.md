@@ -36,46 +36,60 @@ sudo mkdir -p /etc/apt/keyrings
 
 curl -fsSL repo.chainflip.io/keys/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/chainflip.gpg
 
-b、验证密钥的真实性：
+#### b、验证密钥的真实性：
 
 gpg --show-keys /etc/apt/keyrings/chainflip.gpg
 
 <img width="386" alt="从终端看到以下输出" src="https://user-images.githubusercontent.com/100336530/207263177-6fc438f6-32ed-4209-b522-6769264ea975.png">
 
-c、将Chainflip的Repo添加到apt sources列表中
+#### c、将Chainflip的Repo添加到apt sources列表中
 
 echo "deb [signed-by=/etc/apt/keyrings/chainflip.gpg] https://repo.chainflip.io/perseverance/ focal main" | sudo tee /etc/apt/sources.list.d/chainflip.list
 
-d、安装软件包
+#### d、安装软件包
 
 sudo apt-get update
 
 sudo apt-get install -y chainflip-cli chainflip-node chainflip-engine
 
-2、生成密钥
+### 2、生成密钥
 
-a、创建存储密钥的目录
+#### a、创建存储密钥的目录
 
 sudo mkdir /etc/chainflip/keys
 
-b、导入以太坊密钥：YOUR_VALIDATOR_WALLET_PRIVATE_KEY替换成你的实际私钥【强烈建议使用新的钱包私钥！！！】
+#### b、导入以太坊密钥：YOUR_VALIDATOR_WALLET_PRIVATE_KEY替换成你的实际私钥【强烈建议使用新的钱包私钥！！！】
 
 echo -n "YOUR_VALIDATOR_WALLET_PRIVATE_KEY" |  sudo tee /etc/chainflip/keys/ethereum_key_file
 
-c、验证者密钥：为了质押该节点，需要生成Chainflip密钥。签名钥匙的公钥（SS58）实际上也是验证人ID，将需要用它来质押和跟踪节点。
+#### c、验证者密钥：为了质押该节点，需要生成Chainflip密钥。签名钥匙的公钥（SS58）实际上也是验证人ID，将需要用它来质押和跟踪节点。
 
 生成签名密钥：chainflip-node key generate
 
 <img width="531" alt="包含助记词与SS58" src="https://user-images.githubusercontent.com/100336530/207264317-00e5a06b-8695-49af-b1b2-d259b4749266.png">
 
-d、加载签名密钥：将其添加到你的验证器节点中，用你的密钥替换YOUR_CHAINFLIP_SECRET_SEED
+#### d、加载签名密钥：将其添加到你的验证器节点中，用你的密钥替换YOUR_CHAINFLIP_SECRET_SEED
 
 SECRET_SEED=YOUR_CHAINFLIP_SECRET_SEED
 
 echo -n "${SECRET_SEED}" | sudo tee /etc/chainflip/keys/signing_key_file
 
-e、生成节点密钥：用于验证器之间的安全通信
+#### e、生成节点密钥：用于验证器之间的安全通信
 
 sudo chainflip-node key generate-node-key --file /etc/chainflip/keys/node_key_file
 
 cat /etc/chainflip/keys/node_key_file
+
+### 3、配置文件
+
+#### a、创建引擎的配置文件
+
+sudo mkdir -p /etc/chainflip/config
+
+sudo vim /etc/chainflip/config/Default.toml
+
+#### b、编辑配置：需要公网IP、gETH的wss与https地址，确保你没有使用主网的RPC。如下配置：
+
+<img width="522" alt="确保你没有使用主网的RPC" src="https://user-images.githubusercontent.com/100336530/207265934-9caa50f4-f66c-4f85-b24b-ea82fc24b003.png">
+
+
