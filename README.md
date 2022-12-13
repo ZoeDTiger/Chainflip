@@ -90,7 +90,7 @@ sudo vim /etc/chainflip/config/Default.toml
 
 #### b、编辑配置：需要公网IP、gETH的wss与https地址，确保你没有使用主网的RPC。如下配置：
 
-<img width="522" alt="确保你没有使用主网的RPC" src="https://user-images.githubusercontent.com/100336530/207265934-9caa50f4-f66c-4f85-b24b-ea82fc24b003.png">
+<img width="537" alt="确保你没有使用主网的RPC" src="https://user-images.githubusercontent.com/100336530/207268373-f134be85-b3c3-410b-bd7b-a53ae3eb81d5.png">
 
 ### 4、启动
 
