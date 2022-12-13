@@ -40,7 +40,15 @@ b、验证密钥的真实性：
 
 gpg --show-keys /etc/apt/keyrings/chainflip.gpg
 
-<img width="386" alt="微信图片_20221213151830" src="https://user-images.githubusercontent.com/100336530/207263177-6fc438f6-32ed-4209-b522-6769264ea975.png">
+<img width="386" alt="从终端看到以下输出" src="https://user-images.githubusercontent.com/100336530/207263177-6fc438f6-32ed-4209-b522-6769264ea975.png">
 
+c、将Chainflip的Repo添加到apt sources列表中
 
+echo "deb [signed-by=/etc/apt/keyrings/chainflip.gpg] https://repo.chainflip.io/perseverance/ focal main" | sudo tee /etc/apt/sources.list.d/chainflip.list
+
+d、安装软件包
+
+sudo apt-get update
+
+sudo apt-get install -y chainflip-cli chainflip-node chainflip-engine
 
