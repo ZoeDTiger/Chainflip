@@ -28,9 +28,9 @@
 
 # 部署节点
 
-## 1、通过APT Repo下载二进制文件
+### 1、通过APT Repo下载二进制文件
 
-a、添加Chainflip APT Repo
+#### a、添加Chainflip APT Repo
 
 sudo mkdir -p /etc/apt/keyrings
 
