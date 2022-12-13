@@ -62,4 +62,10 @@ b、导入以太坊密钥：YOUR_VALIDATOR_WALLET_PRIVATE_KEY替换成你的实�
 
 echo -n "YOUR_VALIDATOR_WALLET_PRIVATE_KEY" |  sudo tee /etc/chainflip/keys/ethereum_key_file
 
-c、
+c、验证者密钥：为了质押该节点，需要生成Chainflip密钥
+
+生成签名密钥：chainflip-node key generate
+
+<img width="531" alt="包含助记词与SS58" src="https://user-images.githubusercontent.com/100336530/207264317-00e5a06b-8695-49af-b1b2-d259b4749266.png">
+
+
