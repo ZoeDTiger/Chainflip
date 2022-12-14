@@ -158,9 +158,11 @@ sudo chainflip-cli --config-path /etc/chainflip/config/Default.toml register-acc
 
 <img width="739" alt="节点注册为验证器" src="https://user-images.githubusercontent.com/100336530/207487515-3a12205a-ad68-4dee-9cf3-b66314a67283.png">
 
-##### 激活账户，提交激活：
+##### 激活账户：等待一段时间再提交激活，否则会提示错误
 
 sudo chainflip-cli --config-path /etc/chainflip/config/Default.toml activate
+
+<img width="847" alt="提示错误" src="https://user-images.githubusercontent.com/100336530/207496692-7052126c-b90a-4d37-9d35-fac26f256f2d.png">
 
 ##### 轮换验证器密钥：
 
