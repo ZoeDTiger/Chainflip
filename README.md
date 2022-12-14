@@ -114,7 +114,7 @@ sudo systemctl start chainflip-engine
 
 sudo systemctl status chainflip-engine
 
-#### f、查看引擎日志
+#### f、查看引擎日志：初始启动时提示未质押
 
 tail -f /var/log/chainflip-engine.log
 
@@ -131,3 +131,22 @@ sudo systemctl enable chainflip-engine
 sudo systemctl restart chainflip-engine
 
 ### 5、质押
+
+#### a、通过验证者仪表板进行质押【https://stake-perseverance.chainflip.io/auctions】
+
+确保你的Metamask里有tFLIP。合约地址是0x8e71CEe1679bceFE1D426C7f23EAdE9d68e62650
+
+转到 Perseverance Staking App-> "我的节点"
+
+将你的Metamask钱包与tFLIP连接起来
+
+点击按钮 "+添加节点" -> 你应该看到 "注册新节点 "模式
+
+输入你在生成密钥步骤中得到的验证者id —— 你的公钥(SS58) —— 以及你想要质押的tFLIP的数量。点击 "质押"
+
+Metamask会要求你签署两个交易。第一笔是代币批准，第二笔是转让和质押你的tFLIP
+
+一旦你成功质押，跳回你的终端并运行以下命令：sudo systemctl restart chainflip-engine
+
+#### b、注册验证器密钥
+
