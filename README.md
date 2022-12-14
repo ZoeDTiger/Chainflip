@@ -29,61 +29,58 @@
 
 #### a、添加Chainflip APT Repo
 
-sudo mkdir -p /etc/apt/keyrings
-
-curl -fsSL repo.chainflip.io/keys/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/chainflip.gpg
+    sudo mkdir -p /etc/apt/keyrings
+    curl -fsSL repo.chainflip.io/keys/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/chainflip.gpg
 
 #### b、验证密钥的真实性：
 
-gpg --show-keys /etc/apt/keyrings/chainflip.gpg
+    gpg --show-keys /etc/apt/keyrings/chainflip.gpg
 
 <img width="386" alt="从终端看到以下输出" src="https://user-images.githubusercontent.com/100336530/207263177-6fc438f6-32ed-4209-b522-6769264ea975.png">
 
 #### c、将Chainflip的Repo添加到apt sources列表中
 
-echo "deb [signed-by=/etc/apt/keyrings/chainflip.gpg] https://repo.chainflip.io/perseverance/ focal main" | sudo tee /etc/apt/sources.list.d/chainflip.list
+    echo "deb [signed-by=/etc/apt/keyrings/chainflip.gpg] https://repo.chainflip.io/perseverance/ focal main" | sudo tee /etc/apt/sources.list.d/chainflip.list
 
 #### d、安装软件包
 
-sudo apt-get update
-
-sudo apt-get install -y chainflip-cli chainflip-node chainflip-engine
+    sudo apt-get update
+    sudo apt-get install -y chainflip-cli chainflip-node chainflip-engine
 
 ### 2、生成密钥
 
 #### a、创建存储密钥的目录
 
-sudo mkdir /etc/chainflip/keys
+    sudo mkdir /etc/chainflip/keys
 
 #### b、导入以太坊密钥：YOUR_VALIDATOR_WALLET_PRIVATE_KEY替换成你的实际私钥【强烈建议使用新的钱包私钥！！！】
 
-echo -n "YOUR_VALIDATOR_WALLET_PRIVATE_KEY" |  sudo tee /etc/chainflip/keys/ethereum_key_file
+    echo -n "YOUR_VALIDATOR_WALLET_PRIVATE_KEY" |  sudo tee /etc/chainflip/keys/ethereum_key_file
 
 #### c、验证者密钥：为了质押该节点，需要生成Chainflip密钥。签名钥匙的公钥（SS58）实际上也是验证人ID，将需要用它来质押和跟踪节点。
 
-生成签名密钥：chainflip-node key generate
+生成签名密钥：
+
+    chainflip-node key generate
 
 <img width="531" alt="包含助记词与SS58" src="https://user-images.githubusercontent.com/100336530/207264317-00e5a06b-8695-49af-b1b2-d259b4749266.png">
 
 #### d、加载签名密钥：将其添加到你的验证器节点中，用你的密钥替换YOUR_CHAINFLIP_SECRET_SEED，不包括前两个字符（0x）保存在文件中
 
-SECRET_SEED=YOUR_CHAINFLIP_SECRET_SEED
-
-echo -n "${SECRET_SEED:2}" | sudo tee /etc/chainflip/keys/signing_key_file
+    SECRET_SEED=YOUR_CHAINFLIP_SECRET_SEED
+    echo -n "${SECRET_SEED:2}" | sudo tee /etc/chainflip/keys/signing_key_file
 
 #### e、生成节点密钥：用于验证器之间的安全通信
 
-sudo chainflip-node key generate-node-key --file /etc/chainflip/keys/node_key_file
-
-cat /etc/chainflip/keys/node_key_file
+    sudo chainflip-node key generate-node-key --file /etc/chainflip/keys/node_key_file
+    cat /etc/chainflip/keys/node_key_file
 
 ### 3、配置文件
 
 #### a、创建引擎的配置文件
 
-sudo mkdir -p /etc/chainflip/config
-
-sudo vim /etc/chainflip/config/Default.toml
+    sudo mkdir -p /etc/chainflip/config
+    sudo vim /etc/chainflip/config/Default.toml
 
 #### b、编辑配置：需要公网IP、gETH的wss与https地址，确保你没有使用主网的RPC。如下配置：
 
@@ -93,39 +90,38 @@ sudo vim /etc/chainflip/config/Default.toml
 
 #### a、启动chainflip节点：启动后开始同步区块，区块浏览器上可以找到最新的区块： https://blocks-perseverance.chainflip.io/
 
-sudo systemctl start chainflip-node
+    sudo systemctl start chainflip-node
 
 #### b、检查节点状态：
 
-sudo systemctl status chainflip-node
+    sudo systemctl status chainflip-node
 
 #### c、查看节点日志
 
-tail -f /var/log/chainflip-node.log
+    tail -f /var/log/chainflip-node.log
 
 #### d、启动引擎：节点完成同步后，需要启动 chainflip-engine
 
-sudo systemctl start chainflip-engine
+    sudo systemctl start chainflip-engine
 
 #### e、检查引擎状态
 
-sudo systemctl status chainflip-engine
+    sudo systemctl status chainflip-engine
 
 #### f、查看引擎日志：初始启动时提示未质押
 
-tail -f /var/log/chainflip-engine.log
+    tail -f /var/log/chainflip-engine.log
 
 <img width="854" alt="提示节点未质押" src="https://user-images.githubusercontent.com/100336530/207483260-857fd3ab-34a5-48a7-a4f1-1a023c15c18e.png">
 
 #### g、设置服务器重启后自动启动
 
-sudo systemctl enable chainflip-node
-
-sudo systemctl enable chainflip-engine
+    sudo systemctl enable chainflip-node
+    sudo systemctl enable chainflip-engine
 
 #### h、修改配置文件后需要重启
 
-sudo systemctl restart chainflip-engine
+    sudo systemctl restart chainflip-engine
 
 ### 5、质押
 
@@ -151,23 +147,23 @@ Metamask会要求你签署两个交易。第一笔是代币批准，第二笔是
 
 ##### 将节点注册为验证器（节点必须是完全同步的）：
 
-sudo chainflip-cli --config-path /etc/chainflip/config/Default.toml register-account-role Validator
+    sudo chainflip-cli --config-path /etc/chainflip/config/Default.toml register-account-role Validator
 
 <img width="739" alt="节点注册为验证器" src="https://user-images.githubusercontent.com/100336530/207487515-3a12205a-ad68-4dee-9cf3-b66314a67283.png">
 
 ##### 激活账户：等待一段时间再提交激活，否则会提示错误
 
-sudo chainflip-cli --config-path /etc/chainflip/config/Default.toml activate
+    sudo chainflip-cli --config-path /etc/chainflip/config/Default.toml activate
 
 <img width="847" alt="提示错误" src="https://user-images.githubusercontent.com/100336530/207496692-7052126c-b90a-4d37-9d35-fac26f256f2d.png">
 
 ##### 轮换验证器密钥：
 
-sudo chainflip-cli --config-path /etc/chainflip/config/Default.toml rotate
+    sudo chainflip-cli --config-path /etc/chainflip/config/Default.toml rotate
 
 ##### 设置验证节点名称：
 
-sudo chainflip-cli --config-path /etc/chainflip/config/Default.toml vanity-name my-name
+    sudo chainflip-cli --config-path /etc/chainflip/config/Default.toml vanity-name my-name
 
 ### 6、提取与退出
 
@@ -177,7 +173,7 @@ sudo chainflip-cli --config-path /etc/chainflip/config/Default.toml vanity-name 
 
 这样就可以把节点排除在下一次拍卖之外。在最后一次拍卖结束后，所有剩余的tFLIP都将记入余额，仍然需要按照接下来的步骤来领取这些资金
 
-sudo chainflip-cli --config-path /etc/chainflip/config/Default.toml retire
+    sudo chainflip-cli --config-path /etc/chainflip/config/Default.toml retire
 
 #### b、提取tFLIP
 
@@ -185,6 +181,6 @@ sudo chainflip-cli --config-path /etc/chainflip/config/Default.toml retire
 
 ##### 申请索赔证书：FLIP_AMOUNT是想提取的tFLIP的金额，ETH_ADDRESS是你想用来接收tFLIP的ETH地址。
 
-sudo chainflip-cli --config-path /etc/chainflip/config/Default.toml claim FLIP_AMOUNT ETH_ADDRESS
+    sudo chainflip-cli --config-path /etc/chainflip/config/Default.toml claim FLIP_AMOUNT ETH_ADDRESS
 
 申请了证书，继续进入Staking App进行claim。
