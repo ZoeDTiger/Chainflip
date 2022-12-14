@@ -176,4 +176,16 @@ sudo chainflip-cli --config-path /etc/chainflip/config/Default.toml vanity-name 
 
 #### a、退出拍卖
 
+这样就可以把节点排除在下一次拍卖之外。在最后一次拍卖结束后，所有剩余的tFLIP都将记入余额，仍然需要按照接下来的步骤来领取这些资金
+
 sudo chainflip-cli --config-path /etc/chainflip/config/Default.toml retire
+
+#### b、提取tFLIP
+
+要从系统中提取tFLIP，需要使用索赔程序。这是一个多步骤的过程，需要与Chainflip CLI和Staking App互动。
+
+##### 申请索赔证书：FLIP_AMOUNT是想提取的tFLIP的金额，ETH_ADDRESS是你想用来接收tFLIP的ETH地址。
+
+sudo chainflip-cli --config-path /etc/chainflip/config/Default.toml claim FLIP_AMOUNT ETH_ADDRESS
+
+申请了证书，继续进入Staking App进行claim。
