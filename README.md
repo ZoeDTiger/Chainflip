@@ -170,4 +170,10 @@ sudo chainflip-cli --config-path /etc/chainflip/config/Default.toml rotate
 
 sudo chainflip-cli --config-path /etc/chainflip/config/Default.toml vanity-name my-name
 
+### 6、提取与退出
 
+在拍卖没有进行的时候，可以从最低有效投标中提取多余的资金，也可以退出你的节点，与提取不同，取消抵押将使你的节点和所有抵押的tFLIP退出。
+
+#### a、退出拍卖
+
+sudo chainflip-cli --config-path /etc/chainflip/config/Default.toml retire
