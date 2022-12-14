@@ -68,11 +68,11 @@ echo -n "YOUR_VALIDATOR_WALLET_PRIVATE_KEY" |  sudo tee /etc/chainflip/keys/ethe
 
 <img width="531" alt="包含助记词与SS58" src="https://user-images.githubusercontent.com/100336530/207264317-00e5a06b-8695-49af-b1b2-d259b4749266.png">
 
-#### d、加载签名密钥：将其添加到你的验证器节点中，用你的密钥替换YOUR_CHAINFLIP_SECRET_SEED
+#### d、加载签名密钥：将其添加到你的验证器节点中，用你的密钥替换YOUR_CHAINFLIP_SECRET_SEED，不包括前两个字符（0x）保存在文件中
 
 SECRET_SEED=YOUR_CHAINFLIP_SECRET_SEED
 
-echo -n "${SECRET_SEED}" | sudo tee /etc/chainflip/keys/signing_key_file
+echo -n "${SECRET_SEED:2}" | sudo tee /etc/chainflip/keys/signing_key_file
 
 #### e、生成节点密钥：用于验证器之间的安全通信
 
@@ -94,16 +94,38 @@ sudo vim /etc/chainflip/config/Default.toml
 
 ### 4、启动
 
-#### a、启动chainflip节点
+#### a、启动chainflip节点：启动后开始同步区块，区块浏览器上可以找到最新的区块： https://blocks-perseverance.chainflip.io/
 
 sudo systemctl start chainflip-node
 
-#### b、检查该服务，区块浏览器上找到最新的区块： https://blocks-perseverance.chainflip.io/
+#### b、检查节点状态：
 
 sudo systemctl status chainflip-node
 
-#### c、查看实时日志
+#### c、查看节点实时日志
 
 tail -f /var/log/chainflip-node.log
+
+#### d、启动引擎：节点完成同步后，需要启动 chainflip-engine
+
+sudo systemctl start chainflip-engine
+
+#### e、检查引擎状态
+
+sudo systemctl status chainflip-engine
+
+#### f、检查引擎日志
+
+tail -f /var/log/chainflip-engine.log
+
+#### g、设置服务器重启后自动启动
+
+sudo systemctl enable chainflip-node
+
+sudo systemctl enable chainflip-engine
+
+#### h、修改配置文件后需要重启
+
+sudo systemctl restart chainflip-engine
 
 ### 5、质押
