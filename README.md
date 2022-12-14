@@ -132,7 +132,7 @@ sudo systemctl restart chainflip-engine
 
 ### 5、质押
 
-#### a、通过验证者仪表板进行质押【https://stake-perseverance.chainflip.io/auctions】
+#### a、通过验证者仪表板进行质押 https://stake-perseverance.chainflip.io/auctions
 
 确保你的Metamask里有tFLIP。合约地址是0x8e71CEe1679bceFE1D426C7f23EAdE9d68e62650
 
