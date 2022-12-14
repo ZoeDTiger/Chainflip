@@ -138,7 +138,7 @@ sudo systemctl restart chainflip-engine
 
 转到 Perseverance Staking App-> "我的节点"
 
-将你的Metamask钱包与tFLIP连接起来
+将你的Metamask钱包（质押钱包，即前文提到的"第一个账户"）与tFLIP连接起来
 
 点击按钮 "+添加节点" -> 你应该看到 "注册新节点 "模式
 
