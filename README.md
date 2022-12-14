@@ -150,3 +150,24 @@ Metamask会要求你签署两个交易。第一笔是代币批准，第二笔是
 
 #### b、注册验证器密钥
 
+节点添加成功后，需要设置验证器用来产生区块的密钥。如果不这样做，验证器将不能被选中并赢得拍卖。要设置密钥可以使用chainflip-cli。
+
+##### 将节点注册为验证器（节点必须是完全同步的）：
+
+sudo chainflip-cli --config-path /etc/chainflip/config/Default.toml register-account-role Validator
+
+<img width="739" alt="节点注册为验证器" src="https://user-images.githubusercontent.com/100336530/207487515-3a12205a-ad68-4dee-9cf3-b66314a67283.png">
+
+##### 激活账户，提交激活：
+
+sudo chainflip-cli --config-path /etc/chainflip/config/Default.toml activate
+
+##### 轮换验证器密钥：
+
+sudo chainflip-cli --config-path /etc/chainflip/config/Default.toml rotate
+
+##### 设置验证节点名称：
+
+sudo chainflip-cli --config-path /etc/chainflip/config/Default.toml vanity-name my-name
+
+
