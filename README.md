@@ -102,7 +102,7 @@ sudo systemctl start chainflip-node
 
 sudo systemctl status chainflip-node
 
-#### c、查看节点实时日志
+#### c、查看节点日志
 
 tail -f /var/log/chainflip-node.log
 
@@ -114,9 +114,11 @@ sudo systemctl start chainflip-engine
 
 sudo systemctl status chainflip-engine
 
-#### f、检查引擎日志
+#### f、查看引擎日志
 
 tail -f /var/log/chainflip-engine.log
+
+<img width="854" alt="提示节点未质押" src="https://user-images.githubusercontent.com/100336530/207483260-857fd3ab-34a5-48a7-a4f1-1a023c15c18e.png">
 
 #### g、设置服务器重启后自动启动
 
