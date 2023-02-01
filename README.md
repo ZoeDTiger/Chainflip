@@ -10,7 +10,7 @@
 
 目前快速获得tFLIP的方法是通过流动性池：https://tflip-dex.thunderhead.world/
 
-2、钱包需要至少0.1个gETH与10个tFLIP，gETH用于向以太坊区块链提交交易的gas费，tFLIP用于启动验证人节点，成为活跃的验证人则需要更多的tFLIP。
+2、钱包需要至少0.1个gETH与10个tFLIP，gETH用于向以太坊区块链提交交易的gas费，tFLIP用于启动验证人节点，成为活跃的验证人则需要更多的tFLIP。合约地址：0x8e71CEe1679bceFE1D426C7f23EAdE9d68e62650
 
 3、准备gETH RPC地址，可以自己运行geth客户端，也可以使用第三方远程客户端，如：https://www.alchemy.com/  、  https://www.infura.io/zh  、  https://rivet.cloud/
 
